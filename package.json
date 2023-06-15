@@ -11,5 +11,8 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^29.5.0"
+  },
+  "dependencies": {
+    "jsdom": "^22.1.0"
   }
 }
