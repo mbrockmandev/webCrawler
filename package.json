@@ -1,0 +1,15 @@
+{
+  "name": "webcrawler",
+  "version": "1.0.0",
+  "description": "A web crawling Node JS app.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "jest"
+  },
+  "author": "Mike Brockman",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
