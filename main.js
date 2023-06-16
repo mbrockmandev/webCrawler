@@ -1,6 +1,6 @@
 const { normalizeURL, getURLsFromHTML, crawlPage } = require("./crawl.js");
 
-const main = () => {
+const main = async () => {
   // if # cli arguments !== 1, print error, exit
   if (process.argv.length !== 3) {
     console.log(process.argv);
@@ -11,7 +11,8 @@ const main = () => {
 
   const baseURL = process.argv[2];
 
-  crawlPage(baseURL);
+  const pageCounts = await crawlPage(baseURL, baseURL, {});
+  console.log(pageCounts);
 
   // const argument = require("readline").createInterface({
   //   input: process.stdin,
