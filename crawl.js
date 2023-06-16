@@ -55,7 +55,43 @@ const getURLsFromHTML = (htmlBody, baseURL) => {
   return urls;
 };
 
+/**
+ * @param {string} baseURL
+ * @param {string} currentURL
+ * @param {object} pages
+ */
+const crawlPage = async (baseURL, currentURL, pages) => {
+  const validStatuses = [200, 201, 202, 203, 204];
+
+  try {
+    // use fetch to get webpage of baseURL
+    const res = await fetch(baseURL);
+
+    if (!validStatuses.includes(res.status)) {
+      throw new Error(
+        `Something went wrong, here's a status code: ${res.status}`,
+      );
+    }
+
+    if (!res.headers.get("Content-Type").includes("text/html")) {
+      throw new Error(
+        `Something went wrong with the Content-Type: ${res.headers.get(
+          "Content-Type",
+        )}`,
+      );
+    }
+
+    // debug printing
+    const html = await res.text();
+    const urls = getURLsFromHTML(html, baseURL);
+    console.log(urls);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   normalizeURL,
   getURLsFromHTML,
+  crawlPage,
 };
