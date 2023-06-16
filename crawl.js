@@ -42,16 +42,20 @@ const normalizeURL = (urlString) => {
 /**
  * @param {string} htmlBody
  * @param {string} baseURL
+ * @returns {NodeListOf<HTMLAnchorElement>}
  */
 const getURLsFromHTML = (htmlBody, baseURL) => {
-  const dom = new JSDOM(htmlBody);
+  const dom = new JSDOM(htmlBody, {
+    url: baseURL,
+  });
 
   const allLinks = dom.window.document.querySelectorAll("a");
-  for (let link of allLinks) {
-    console.log("link: " + link);
-  }
+  const urls = [...allLinks].map((a) => a.href);
+
+  return urls;
 };
 
 module.exports = {
   normalizeURL,
+  getURLsFromHTML,
 };
