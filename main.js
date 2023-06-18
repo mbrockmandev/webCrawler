@@ -1,4 +1,5 @@
-const { normalizeURL, getURLsFromHTML, crawlPage } = require("./crawl.js");
+const { crawlPage } = require("./crawl.js");
+const { printReport } = require("./report.js");
 
 const main = async () => {
   // if # cli arguments !== 1, print error, exit
@@ -11,21 +12,8 @@ const main = async () => {
 
   const baseURL = process.argv[2];
 
-  const pageCounts = await crawlPage(baseURL, baseURL, {});
-  console.log(pageCounts);
-
-  // const argument = require("readline").createInterface({
-  //   input: process.stdin,
-  //   output: process.stdout,
-  // });
-
-  // readline.question(
-  //   "Which URL would you like to parse for its links? ",
-  //   (url) => {
-  //     getURLsFromHTML()
-  //     console.log();
-  //   },
-  // );
+  const pages = await crawlPage(baseURL, baseURL, {});
+  printReport(pages);
 };
 
 main();
